@@ -1,0 +1,32 @@
+import java.util.concurrent.TimeUnit;
+
+public class HealthTracker {
+    public static void main(String[] args) {
+        int seconds = 180; // 3 minutes
+        int interval = 3; // 3 seconds
+
+        for (int i = 0; i < seconds; i += interval) {
+            System.out.println("Time: " + formatTime(i));
+            System.out.println("Blood Pressure: " + getBloodPressure() + " mmHg");
+            System.out.println("Walking Status: Walking");
+            try {
+                TimeUnit.SECONDS.sleep(interval);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    private static String formatTime(int seconds) {
+        int H = seconds / 3600;
+        int M = (seconds % 3600) / 60;
+        int S = seconds % 60;
+
+        return String.format("%02d:%02d:%02d", H, M, S);
+    }
+
+    private static int getBloodPressure() {
+        // Simulate blood pressure reading
+        return (int) (Math.random() * 100 + 80); // random blood pressure between 80 and 180 mmHg
+    }
+}
